@@ -17,7 +17,7 @@ branches.each { branch ->
 
     job("$basePath") {
          parameters {
-            stringParam 'host'
+             stringParam('MESSAGE', 'Hello world!') 
         }
 
         scm {
@@ -27,7 +27,7 @@ branches.each { branch ->
             scm 'H/30 * * * *'
         }
         steps {
-            shell 'echo Hi....', true
+            shell('echo $MESSAGE')
         }
     }
 
