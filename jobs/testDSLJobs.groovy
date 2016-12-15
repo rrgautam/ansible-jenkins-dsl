@@ -31,7 +31,7 @@ branches.each { branch ->
         }
         steps {
         // ansiblePlaybook('/vagrant/DSL.yml') {
-        ansiblePlaybook('ansible/**/DSL.yml') {
+        ansiblePlaybook('ansible/DSL.yml') {
         ansibleName('2.2.0.0')
         sudo(true)
     }
