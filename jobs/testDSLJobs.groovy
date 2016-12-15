@@ -1,13 +1,12 @@
 import groovy.json.JsonSlurper
 
 String basePath = 'DSL-Test-Job'
-String repo = 'rewatiramangautam/ansible-jenkins-dsl'
-//https://git.nbnco.net.au/rewatiramangautam/ansible-jenkins-dsl.git
+String repo = 'rrgautam/ansible-jenkins-dsl'
 
 // folder(basePath) {
 //     description 'This example shows how to create a set of jobs for each github branch, each in its own folder.'
 // }
-URL branchUrl = "https://git.nbnco.net.au/$repo/branches".toURL()
+URL branchUrl = "https://api.github.com/repos/$repo/branches".toURL()
 List branches = new JsonSlurper().parse(branchUrl.newReader())
 
 branches.each { branch ->
@@ -22,7 +21,7 @@ branches.each { branch ->
         }
 
         scm {
-            gitlab repo, branch.name
+            github repo, branch.name
         }
         triggers {
             scm 'H/30 * * * *'
@@ -31,7 +30,8 @@ branches.each { branch ->
             shell('echo $MESSAGE')
         }
         steps {
-        ansiblePlaybook('/jobs/ansible/DSL.yml') {
+        // ansiblePlaybook('/vagrant/DSL.yml') {
+        ansiblePlaybook('ansible/DSL.yml') {
         ansibleName('2.2.0.0')
         sudo(true)
     }
