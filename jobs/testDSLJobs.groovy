@@ -30,7 +30,8 @@ branches.each { branch ->
             shell('echo $MESSAGE')
         }
         steps {
-        ansiblePlaybook('/vagrant/DSL.yml') {
+        // ansiblePlaybook('/vagrant/DSL.yml') {
+        ansiblePlaybook('ansible/**/DSL.yml') {
         ansibleName('2.2.0.0')
         sudo(true)
     }
